@@ -18,12 +18,26 @@ Remember to put the actual problem in `input/input01.txt`.
 $ bin/day1_part1
 ```
 
+### To run one test
+Both part 1 and 2.
+```bash
+$ ./run.sh 1 test 
+# or
+$ ./run.sh test 2
+```
+
 ### To run all tests
 ```bash
 $ ./run.sh test
+```
+
+### To solve one problem
+```bash
+$ ./run.sh 5
 ```
 
 ### To solve all problems
 ```bash
 $ ./run.sh
 ```
+
