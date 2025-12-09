@@ -13,8 +13,8 @@ $ bin/day1_part1 test
 ```
 
 ### Solve a problem
+Remember to put the actual problem in `input/input01.txt`.
 ```bash
-$ # Remember to put the actual problem in input/input01.txt
 $ bin/day1_part1
 ```
 
