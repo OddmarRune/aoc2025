@@ -15,6 +15,7 @@ long area(const pair<long,long> &a, const pair<long,long> &b) {
 
 
 int main(int argc, char **argv) {  
+	ScopeTimer t(argv[0]);
 	ifstream file(get_filename(argc, argv));
 	string str; 
 	vector<pair<long,long>> list;

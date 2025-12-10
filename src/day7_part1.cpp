@@ -6,10 +6,8 @@
 
 using namespace std;
 
-
-
-
 int main(int argc, char **argv) {  
+	ScopeTimer t(argv[0]);
 	ifstream file(get_filename(argc, argv));
 	string str; 
 	int split_number = 0;

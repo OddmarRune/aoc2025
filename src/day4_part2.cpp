@@ -54,6 +54,7 @@ int reduce(vector<vector<char>> &map) {
 
 
 int main(int argc, char **argv) {  
+  ScopeTimer t(argv[0]);
   ifstream file(get_filename(argc, argv));
   string str; 
   vector<vector<char>> map;

@@ -1,8 +1,31 @@
 #pragma once
 #include <string>
 #include <cstring>
+#include <chrono>
+#include <iostream>
 
 using namespace std;
+
+class ScopeTimer {
+public:
+    explicit ScopeTimer(string name = "")
+        : name_(move(name)),
+          start_(chrono::high_resolution_clock::now()) {}
+
+    ~ScopeTimer() {
+        auto end = chrono::high_resolution_clock::now();
+        auto us = chrono::duration_cast<chrono::microseconds>(end - start_).count();
+
+        cout << (name_.empty() ? "" : name_ + ": ")
+                  << us / 1000.0 << " ms\n";
+  	cout << endl;
+    }
+
+private:
+    string name_;
+    chrono::high_resolution_clock::time_point start_;
+};
+
 
 string get_filename(int argc, char **argv) {
   string filename = "input/";	

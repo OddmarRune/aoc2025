@@ -6,6 +6,12 @@
 #include <cmath>
 #include "helpers.h"
 
+
+/* This problem is solved using brute force. No elegance at all. It uses way to much memory and time. 
+ * I'll fix it later if I really want. Flood fill isn't really flood fill. just enought to fill my example.
+ */
+
+
 using namespace std;
 
 
@@ -33,7 +39,6 @@ void draw(vector<vector<char>> &world, const pair<long,long> &a, const pair<long
 	}
 }
 
-
 void show(const vector<vector<char>> &world) {
 	for (int i=0; i<world.size(); i++) {
 		for (int l=0; l<world[i].size(); l++) {
@@ -43,8 +48,8 @@ void show(const vector<vector<char>> &world) {
 	}
 }
 
-void flod_fill(vector<vector<char>> &world) {
-	for (int j=0; j<2; j++) {
+void flood_fill(vector<vector<char>> &world, int n=2) {
+	for (int j=0; j<n; j++) {
 	for (int i=0; i<world.size(); i++) {
 		bool inside = false;
 		bool unknown = false;
@@ -140,9 +145,16 @@ bool check_area(const vector<vector<char>> &world, const pair<long,long> &a, con
 	return true;
 }
 
-
+void draw_area(vector<vector<char>> & world, const pair<long,long> &a, const pair<long,long> &b) {
+	long start1 = min(a.first,b.first);
+	long start2 = min(a.second,b.second);
+	long stop1 = max(a.first,b.first);
+	long stop2 = max(a.second,b.second);
+	for (int i=start1; i<=stop1; i++) for (int l=start2; l<=stop2; l++) world[i][l] = 'O';
+}
 
 int main(int argc, char **argv) {  
+	ScopeTimer t(argv[0]);
 	ifstream file(get_filename(argc, argv));
 	string str; 
 	vector<pair<long,long>> list;
@@ -168,8 +180,7 @@ int main(int argc, char **argv) {
 	for (int l=0; l<list.size(); l++) {
 		draw(world, list[l], list[(l+1)%list.size()]);
 	}
-	flod_fill(world);
-	if (max2 < 100) show(world);
+	flood_fill(world, 1);
 	long max_area = 0;
 	pair<int,int> max_pair{-1,-1};
 	for (int i = 0; i<list.size(); i++) {
@@ -181,6 +192,10 @@ int main(int argc, char **argv) {
 				max_pair = {i,l};
 			}
 		}
+	}
+	if (max2 < 100) {
+		draw_area(world, list[max_pair.first], list[max_pair.second]);
+		show(world);
 	}
 	cout << " Area = " << max_area << endl;
 	cout << list[max_pair.first].second << ',' << list[max_pair.first].first << " - " 

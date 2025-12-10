@@ -34,6 +34,7 @@ bool is_connected(const vector<int> &c, int a) {
 
 
 int main(int argc, char **argv) {  
+	ScopeTimer t(argv[0]);
 	ifstream file(get_filename(argc, argv));
 	string str; 
 	vector<vec3> V;
@@ -46,6 +47,8 @@ int main(int argc, char **argv) {
 
 		}
 	}
+	int N = 1000;
+	if (V.size()<25) N = 10;
 	priority_queue<pair<double, pair<int, int>>> pq;
 	for (int i=0; i<V.size(); i++) {
 		for (int j=i+1; j<V.size(); j++) {
@@ -54,7 +57,7 @@ int main(int argc, char **argv) {
 		}
 	}
 	vector<vector<int>> connections;
-	for (int i=0;i<1000 && !pq.empty(); i++) {
+	for (int i=0;i<N && !pq.empty(); i++) {
 		auto connect  = pq.top();
 		pq.pop();
 		int a = connect.second.first;

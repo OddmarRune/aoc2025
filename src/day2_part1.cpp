@@ -25,6 +25,7 @@ long count(long start, long stop) {
 
 
 int main(int argc, char **argv) {  
+  ScopeTimer t(argv[0]);
   ifstream file(get_filename(argc, argv));
   string str; 
   long sum=0;
